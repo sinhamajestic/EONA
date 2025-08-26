@@ -1,3 +1,6 @@
+/* Import fonts - AI Professional Typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 .App-logo {
     height: 40vmin;
     pointer-events: none;
@@ -31,4 +34,267 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+/* SnapCast Design System - Audio Social Media Theme */
+
+:root {
+  /* Backgrounds - Primary Interface */
+  --bg-primary: #FFFFFF;
+  --bg-light: #F8F7FF;
+  --bg-subtle: #F0EFF5;
+  
+  /* Text - Professional Hierarchy */
+  --text-primary: #0A0A0A;
+  --text-secondary: #3C3B3D;
+  --text-muted: #AFADB2;
+  --text-caption: #757478;
+  
+  /* Borders - Minimal Design */
+  --border-light: #CBC9CF;
+  --border-medium: #E6E4EB;
+  
+  /* BRAND COLORS - Audio Social Media Theme */
+  --brand-primary: #6366F1;      /* Indigo primary for audio/social */
+  --brand-secondary: #4F46E5;    /* Deeper indigo for hover */
+  --brand-dark: #3730A3;         /* Dark indigo for active */
+  --brand-accent: #EC4899;       /* Pink accent for social elements */
+  
+  /* GRADIENT COLORS - Background Accents Only */
+  --gradient-purple: #8B5CF6;
+  --gradient-pink: #EC4899;
+  --gradient-orange: #F59E0B;
+}
+
+/* Typography System - Audio Social Media */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.display-hero { 
+  font-size: 56px; 
+  font-weight: 600; 
+  line-height: 1.1; 
+  letter-spacing: -0.02em;
+}
+
+.heading-large { 
+  font-size: 32px; 
+  font-weight: 600; 
+  line-height: 1.25; 
+  letter-spacing: -0.01em;
+}
+
+.heading-medium { 
+  font-size: 24px; 
+  font-weight: 500; 
+  line-height: 1.3; 
+  letter-spacing: -0.005em;
+}
+
+.body-large { 
+  font-size: 18px; 
+  font-weight: 400; 
+  line-height: 1.6; 
+}
+
+.body-standard { 
+  font-size: 16px; 
+  font-weight: 400; 
+  line-height: 1.5; 
+}
+
+.body-small { 
+  font-size: 14px; 
+  font-weight: 400; 
+  line-height: 1.43; 
+}
+
+/* Button System - Audio Social Media */
+.btn-primary {
+  background: var(--brand-primary);
+  color: white;
+  border: none;
+  border-radius: 26px;
+  padding: 18px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 50px;
+  letter-spacing: 0;
+}
+
+.btn-primary:hover {
+  background: var(--brand-secondary);
+  transform: scale(1.02);
+}
+
+.btn-primary:active {
+  background: var(--brand-dark);
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+/* Form Components */
+.form-input {
+  width: 100%;
+  padding: 18px;
+  border: 1px solid var(--border-medium);
+  border-radius: 34px;
+  font-size: 16px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: var(--brand-primary);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Gradient Backgrounds */
+.gradient-hero {
+  background: linear-gradient(135deg, 
+    var(--gradient-purple) 0%, 
+    var(--gradient-pink) 50%, 
+    var(--gradient-orange) 100%
+  );
+  position: relative;
+}
+
+.gradient-overlay {
+  position: relative;
+}
+
+.gradient-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  z-index: 1;
+}
+
+.gradient-overlay > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Layout System */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container-wide {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.container-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Spacing System */
+.space-xs { margin: 8px; }
+.space-sm { margin: 16px; }
+.space-md { margin: 24px; }
+.space-lg { margin: 32px; }
+.space-xl { margin: 48px; }
+.space-2xl { margin: 64px; }
+.space-3xl { margin: 80px; }
+
+.pad-xs { padding: 8px; }
+.pad-sm { padding: 16px; }
+.pad-md { padding: 24px; }
+.pad-lg { padding: 32px; }
+.pad-xl { padding: 48px; }
+.pad-2xl { padding: 64px; }
+.pad-3xl { padding: 80px; }
+
+/* Animations */
+.animate-slide-up {
+  opacity: 0;
+  transform: translateY(150px);
+  animation: slideUpSpring 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+@keyframes slideUpSpring {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+/* Responsive Design */
+@media (min-width: 810px) {
+  .container { padding: 0 32px; }
+  .display-hero { font-size: 64px; }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .display-hero { font-size: 72px; }
+}
+
+@media (min-width: 1440px) {
+  .display-hero { font-size: 80px; }
+}
+
+@media (max-width: 809px) {
+  .display-hero { font-size: 36px; line-height: 1.2; }
+  .heading-large { font-size: 24px; }
+  .heading-medium { font-size: 20px; }
+  
+  .form-input { padding: 16px; }
+  .container { padding: 0 16px; }
+  .space-3xl { margin: 48px; }
+  .space-2xl { margin: 32px; }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SnapCastLanding = () => {
+const SnapCastLanding = ({ onNavigateToCreate }) => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Background gradient */}
@@ -31,7 +31,10 @@ const SnapCastLanding = () => {
               {/* Navigation Links */}
               <div className="flex items-center space-x-12">
                 <div className="text-white font-semibold text-lg">SnapCast</div>
-                <div className="text-white/80 hover:text-white cursor-pointer transition-colors">Creation</div>
+                <div 
+                  className="text-white/80 hover:text-white cursor-pointer transition-colors"
+                  onClick={() => onNavigateToCreate && onNavigateToCreate()}
+                >Creation</div>
                 <div className="text-white/80 hover:text-white cursor-pointer transition-colors">Feed</div>
               </div>
               
@@ -86,45 +89,51 @@ const SnapCastLanding = () => {
             <div className="w-24 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto"></div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Feature Card 1 */}
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Feature Card 1 - Instant Murf Voices */}
+            <section className="relative w-full h-[341px] bg-[#ffffff05] rounded-[31px] border border-solid border-[#9da3aed9] hover:bg-[#ffffff08] transition-all duration-300 group" role="banner">
+              <div className="flex flex-col items-center justify-center h-full px-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                   </svg>
                 </div>
-                <h4 className="text-xl font-semibold text-white mb-4">Instant Murf Voices</h4>
-                <p className="text-gray-400 leading-relaxed">Turn your text into engaging short-form audio using</p>
+                <h4 className="text-xl font-semibold text-white mb-4 text-center">Instant Murf Voices</h4>
+                <p className="font-normal text-[#fefefe] text-lg text-center leading-[24px] max-w-[300px]">
+                  Turn your text into engaging short-form audio using realistic AI voices.
+                </p>
               </div>
-            </div>
+            </section>
 
-            {/* Feature Card 2 */}
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            {/* Feature Card 2 - Remix In Seconds */}
+            <section className="relative w-full h-[341px] bg-[#ffffff05] rounded-[31px] border border-solid border-[#9da3aed9] hover:bg-[#ffffff08] transition-all duration-300 group" role="banner">
+              <div className="flex flex-col items-center justify-center h-full px-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h4 className="text-xl font-semibold text-white mb-4">Remix In Secods</h4>
-                <p className="text-gray-400 leading-relaxed">Turn your text into engaging short-form audio using</p>
+                <h4 className="text-xl font-semibold text-white mb-4 text-center">Remix In Seconds</h4>
+                <p className="font-normal text-[#fefefe] text-lg text-center leading-[24px] max-w-[300px]">
+                  Turn your text into engaging short-form audio using realistic AI voices.
+                </p>
               </div>
-            </div>
+            </section>
 
-            {/* Feature Card 3 */}
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 group">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+            {/* Feature Card 3 - Built For Virality */}
+            <section className="relative w-full h-[341px] bg-[#ffffff05] rounded-[31px] border border-solid border-[#9da3aed9] hover:bg-[#ffffff08] transition-all duration-300 group" role="banner">
+              <div className="flex flex-col items-center justify-center h-full px-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
-                <h4 className="text-xl font-semibold text-white mb-4">Built For Virality</h4>
-                <p className="text-gray-400 leading-relaxed">Turn your text into engaging short-form audio using</p>
+                <h4 className="text-xl font-semibold text-white mb-4 text-center">Built For Virality</h4>
+                <p className="font-normal text-[#fefefe] text-lg text-center leading-[24px] max-w-[300px]">
+                  Turn your text into engaging short-form audio using realistic AI voices.
+                </p>
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </div>

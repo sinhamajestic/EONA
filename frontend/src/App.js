@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
+
 // Landing Page Component
 const SnapCastLanding = ({ onNavigate }) => {
   return (
@@ -226,7 +227,7 @@ const CreatePage = ({ onNavigate }) => {
                 </p>
               </div>
               
-              <button className="w-full bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full border border-white/30 transition-all duration-300">
+              <button onClick={() => onNavigate('compose')} className="w-full bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full border border-white/30 transition-all duration-300">
                 FROM SCRIPT
               </button>
             </div>
@@ -431,6 +432,19 @@ const SignUp = ({ onNavigate }) => {
     </div>
   );
 };
+// Compose page from script
+const ComposePage = ({ onNavigate }) => (
+  <div className="min-h-screen bg-black text-white p-8">
+    <button
+      onClick={() => onNavigate('create')}
+      className="mb-6 px-4 py-2 rounded-full border border-white/30"
+    >
+      ← Back
+    </button>
+    <h1 className="text-5xl font-light tracking-widest mb-8"></h1>
+    {/* Paste your real compose UI here */}
+  </div>
+);
 
 // Complete App Component with Navigation
 function App() {
@@ -447,7 +461,9 @@ function App() {
   } else if (currentPage === 'signup') {
     return <SignUp onNavigate={handleNavigation} />;
   }
-  
+    else if (currentPage === 'compose') {
+    return <ComposePage onNavigate={handleNavigation} />;
+    } 
   return null;
 }
 

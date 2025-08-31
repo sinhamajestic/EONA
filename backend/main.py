@@ -9,6 +9,8 @@ import hashlib
 import time
 from datetime import datetime, timedelta
 
+
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 # Web framework and API
 from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks, Request
 from fastapi.responses import RedirectResponse
@@ -202,46 +204,46 @@ emotion_enhancer = EmotionEnhancer()
 murf_client = MurfAIClient()
 
 # --- AUTHENTICATION ENDPOINTS ---
-@app.get("/auth/google")
-async def login_google():
-    google = OAuth2Session(GOOGLE_CLIENT_ID, scope=SCOPE, redirect_uri=GOOGLE_REDIRECT_URI)
-    authorization_url, state = google.authorization_url(AUTHORIZATION_URL, access_type="offline", prompt="select_account")
-    return RedirectResponse(authorization_url)
+# @app.get("/auth/google")
+# async def login_google():
+#     google = OAuth2Session(GOOGLE_CLIENT_ID, scope=SCOPE, redirect_uri=GOOGLE_REDIRECT_URI)
+#     authorization_url, state = google.authorization_url(AUTHORIZATION_URL, access_type="offline", prompt="select_account")
+#     return RedirectResponse(authorization_url)
 
-@app.get("/auth/google/callback")
-async def auth_google_callback(request: Request, db: Session = Depends(get_db)):
-    try:
-        google = OAuth2Session(GOOGLE_CLIENT_ID, redirect_uri=GOOGLE_REDIRECT_URI)
-        token = google.fetch_token(TOKEN_URL, client_secret=GOOGLE_CLIENT_SECRET, authorization_response=str(request.url))
+# @app.get("/auth/google/callback")
+# async def auth_google_callback(request: Request, db: Session = Depends(get_db)):
+#     try:
+#         google = OAuth2Session(GOOGLE_CLIENT_ID, redirect_uri=GOOGLE_REDIRECT_URI)
+#         token = google.fetch_token(TOKEN_URL, client_secret=GOOGLE_CLIENT_SECRET, authorization_response=str(request.url))
         
-        user_info_res = google.get('https://www.googleapis.com/oauth2/v3/userinfo')
-        if not user_info_res.ok:
-            raise HTTPException(status_code=400, detail="Failed to fetch user info from Google.")
+#         user_info_res = google.get('https://www.googleapis.com/oauth2/v3/userinfo')
+#         if not user_info_res.ok:
+#             raise HTTPException(status_code=400, detail="Failed to fetch user info from Google.")
             
-        user_info = user_info_res.json()
-        google_id = user_info['sub']
-        email = user_info['email']
-        name = user_info.get('name', '')
+#         user_info = user_info_res.json()
+#         google_id = user_info['sub']
+#         email = user_info['email']
+#         name = user_info.get('name', '')
 
-        user = db.query(User).filter(User.google_id == google_id).first()
-        if not user:
-            user = User(google_id=google_id, email=email, name=name)
-            db.add(user)
-            db.commit()
-            db.refresh(user)
+#         user = db.query(User).filter(User.google_id == google_id).first()
+#         if not user:
+#             user = User(google_id=google_id, email=email, name=name)
+#             db.add(user)
+#             db.commit()
+#             db.refresh(user)
         
-        access_token = create_access_token(data={"sub": str(user.id)})
+#         access_token = create_access_token(data={"sub": str(user.id)})
         
-        redirect_url = f"http://localhost:3000?token={access_token}"
-        return RedirectResponse(redirect_url)
+#         redirect_url = f"http://localhost:3000?token={access_token}"
+#         return RedirectResponse(redirect_url)
 
-    except Exception as e:
-        logger.error(f"Google auth callback error: {e}")
-        return RedirectResponse(f"http://localhost:3000?error=auth_failed")
+#     except Exception as e:
+#         logger.error(f"Google auth callback error: {e}")
+#         return RedirectResponse(f"http://localhost:3000?error=auth_failed")
 
-@app.get("/api/v1/users/me")
-async def read_users_me(current_user: User = Depends(get_current_user)):
-    return {"email": current_user.email, "name": current_user.name}
+# @app.get("/api/v1/users/me")
+# async def read_users_me(current_user: User = Depends(get_current_user)):
+#     return {"email": current_user.email, "name": current_user.name}
 # --------------------------------
 
 # --- API Endpoints ---
@@ -292,9 +294,9 @@ async def get_available_purposes(api_key: str = Depends(verify_api_key)):
     """Get list of available purposes"""
     return {"purposes": [{"id": purpose.value, "name": purpose.value.title()} for purpose in Purpose]}
 
-@app.get("/api/v1/history")
-async def get_user_history(
-
+@app.get("/api/v1/health")
+async def health_check():
+    return {"status": "healthy", "version": "1.0.0", "timestamp": time.time()}
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

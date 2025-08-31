@@ -3360,3 +3360,20 @@
 2025-08-31 13:22:24,816 - main - INFO - Successfully generated TTS for request b9cf9e63f72336f6
 2025-08-31 13:22:24,828 - main - WARNING - Content blocked: Content contains inappropriate terms: ['explicit']
 2025-08-31 13:22:24,865 - main - WARNING - Content blocked: Content contains inappropriate terms: ['adult']
+2025-08-31 17:12:35,354 - main - ERROR - Google auth callback error: (insecure_transport) OAuth 2 MUST utilize https.
+2025-08-31 17:12:49,968 - main - ERROR - Google auth callback error: (insecure_transport) OAuth 2 MUST utilize https.
+2025-08-31 17:13:38,555 - main - ERROR - Google auth callback error: (insecure_transport) OAuth 2 MUST utilize https.
+2025-08-31 17:14:27,005 - main - ERROR - Google auth callback error: (insecure_transport) OAuth 2 MUST utilize https.
+2025-08-31 17:22:11,287 - main - ERROR - Google auth callback error: (insecure_transport) OAuth 2 MUST utilize https.
+2025-08-31 17:23:01,006 - main - ERROR - Google auth callback error: (insecure_transport) OAuth 2 MUST utilize https.
+2025-08-31 17:41:41,691 - main - ERROR - Google auth callback error: Expecting a string- or bytes-formatted key.
+2025-08-31 17:49:25,682 - main - ERROR - Google auth callback error: Expecting a string- or bytes-formatted key.
+2025-08-31 17:55:04,107 - main - ERROR - Google auth callback error: (invalid_grant) Bad Request
+2025-08-31 17:55:04,543 - main - ERROR - Google auth callback error: (invalid_grant) Bad Request
+2025-08-31 17:55:04,972 - main - ERROR - Google auth callback error: (invalid_grant) Bad Request
+2025-08-31 17:55:06,322 - main - ERROR - Google auth callback error: (invalid_grant) Bad Request
+2025-08-31 17:55:06,741 - main - ERROR - Google auth callback error: (invalid_grant) Bad Request
+2025-08-31 17:55:07,262 - main - ERROR - Google auth callback error: (invalid_grant) Bad Request
+2025-08-31 17:55:07,629 - main - ERROR - Google auth callback error: (invalid_grant) Bad Request
+2025-08-31 17:55:08,033 - main - ERROR - Google auth callback error: (invalid_grant) Bad Request
+2025-08-31 17:56:55,731 - main - ERROR - Google auth callback error: Expecting a string- or bytes-formatted key.

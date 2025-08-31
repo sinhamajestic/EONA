@@ -84,39 +84,22 @@ const ComposePage = ({ onNavigate }) => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-purple-900 relative overflow-hidden">
+    <div className="min-h-screen via-gray-900 to-purple-00 relative overflow-hidden">
       {/* Animated Background Elements */}
       <AnimatedWaveform side="left" />
       <AnimatedWaveform side="right" />
       
       {/* Background Blur Elements */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-600 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-400 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
 
-      {/* Glass Navigation Bar */}
-      <nav className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full px-8 py-4">
-        <div className="flex items-center space-x-12">
-          <div className="text-white font-bold text-xl">VOICE</div>
-          <div className="flex space-x-8">
-            <button className="text-white/70 hover:text-white transition-colors">
-              Voice
-            </button>
-            <button className="text-white bg-white/20 px-4 py-2 rounded-full">
-              Create
-            </button>
-            <button className="text-white/70 hover:text-white transition-colors">
-              Feed
-            </button>
-          </div>
-          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></div>
-        </div>
-      </nav>
+      
 
       {/* Main Content */}
       <div className="pt-32 px-8 max-w-7xl mx-auto">
         {/* COMPOSE Title */}
-        <div className="text-center mb-12">
-          <h1 className="text-6xl font-light text-white tracking-wider">
+        <div className="text-center mb-36">
+          <h1 className="text-8xl md:text-9xl font-bold mb-4 bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
             COMPOSE
           </h1>
         </div>
@@ -186,7 +169,7 @@ const ComposePage = ({ onNavigate }) => {
           </div>
 
           {/* Right Panel - Voice & Style */}
-          <div className="bg-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-8">
+          <div className="bg-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-8 mb-42">
             <h2 className="text-4xl font-light text-white mb-8">Voice & Style</h2>
             
             {/* AI Voice Selection */}
@@ -209,7 +192,7 @@ const ComposePage = ({ onNavigate }) => {
             </div>
 
             {/* Category Selection */}
-            <div className="mb-12">
+            <div className="mb-24">
               <label className="block text-white/80 text-xl font-light mb-4">Category</label>
               <div className="bg-white/10 backdrop-blur-sm border border-purple-400/50 rounded-full p-4">
                 <select
@@ -228,8 +211,8 @@ const ComposePage = ({ onNavigate }) => {
             </div>
 
             {/* Generate Audio Section */}
-            <div className="bg-white/10 backdrop-blur-sm border border-purple-400/50 rounded-3xl p-6">
-              <h3 className="text-2xl font-medium text-white mb-2">Generate Audio</h3>
+            <div className="bg-white/10 backdrop-blur-sm border border-purple-400/50 rounded-3xl p-6 mt-4">
+              <h3 className="text-2xl font-medium text-white mb-2 mt-4">Generate Audio</h3>
               <p className="text-white/70 text-lg mb-6">
                 Ready To Bring Your Content To Life With AI Voice?
               </p>
@@ -239,7 +222,7 @@ const ComposePage = ({ onNavigate }) => {
                 disabled={!title || !content || !selectedVoice || !selectedCategory || isGenerating}
                 className={`w-full py-4 px-8 rounded-full text-xl font-medium transition-all duration-300 ${
                   !title || !content || !selectedVoice || !selectedCategory || isGenerating
-                    ? 'bg-gray-600/50 text-gray-400 cursor-not-allowed'
+                    ? 'bg-gradient-to-r from-blue-300 to-purple-400 text-black cursor-not-allowed'
                     : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25'
                 }`}
               >

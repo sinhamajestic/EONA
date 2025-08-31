@@ -1,72 +1,80 @@
 import React, { useState } from 'react';
 import './App.css';
+import Composefromscript from './components/Composefromscript';
+import ComposeWithoutScriptPage from './components/Composewithoutscript';
 
+// Shared Navigation Component - Matches COMPOSE page design exactly
+const SharedNavigation = ({ onNavigate, activePage }) => {
+  return (
+    <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+      <div className="flex items-center bg-white/5 backdrop-blur-md rounded-2xl px-24 py-5 border border-white/10 shadow-lg w-full max-w-1xl">
+        <div
+          className="text-white font-medium text-3xl cursor-pointer hover:text-gray-300 transition-colors"
+          onClick={() => onNavigate('landing')}
+        >
+          EONA
+        </div>
+        <div
+          className={`font-medium text-3xl cursor-pointer transition-colors mx-64 ${
+            activePage === 'create' 
+              ? 'text-white' 
+              : 'text-gray-300 hover:text-white'
+          }`}
+          onClick={() => onNavigate('create')}
+        >
+          Create
+        </div>
+        
+        <div className="text-gray-300 hover:text-white cursor-pointer transition-colors font-medium text-3xl">
+          Feed
+        </div>
+        
+        
+      </div>
+    </nav>
+  );
+};
+
+// Shared Background Component
+const SharedBackground = () => {
+  return (
+    <>
+      {/* Background gradient - darker theme */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/40 via-black to-gray-900/40"></div>
+      {/* Background decorative elements */}
+      <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+    </>
+  );
+};
 
 // Landing Page Component
 const SnapCastLanding = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20"></div>
-      
-      {/* Audio waveform visualization on the left */}
-      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
-        <div className="flex items-end space-x-1 opacity-60">
-          {Array.from({length: 20}).map((_, i) => (
-            <div 
-              key={i}
-              className="w-1 bg-gradient-to-t from-purple-500 to-blue-400 animate-pulse"
-              style={{
-                height: `${Math.random() * 200 + 50}px`,
-                animationDelay: `${i * 0.1}s`,
-                animationDuration: `${1 + Math.random()}s`
-              }}
-            ></div>
-          ))}
-        </div>
-      </div>
-
-      {/* Glass Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50">
-        <div className="backdrop-blur-md bg-white/10 border-b border-white/20">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              {/* Navigation Links */}
-              <div className="flex items-center space-x-12">
-                <div className="text-white font-semibold text-lg">SnapCast</div>
-                <div 
-                  className="text-white/80 hover:text-white cursor-pointer transition-colors"
-                  onClick={() => onNavigate('create')}
-                >
-                  Creation
-                </div>
-                <div className="text-white/80 hover:text-white cursor-pointer transition-colors">Feed</div>
-              </div>
-              
-              {/* Hamburger Menu */}
-              <div className="flex flex-col space-y-1 cursor-pointer">
-                <div className="w-6 h-0.5 bg-white"></div>
-                <div className="w-6 h-0.5 bg-white"></div>
-                <div className="w-6 h-0.5 bg-white"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SharedBackground />
+      <SharedNavigation onNavigate={onNavigate} activePage="landing" />
 
       {/* Main Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6">
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6 pt-36">
         {/* Powered by Murf badge */}
         <div className="mb-8">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-            <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
-            <span className="text-sm text-white/90">Powered By Murf</span>
-          </div>
-        </div>
+  <div className="relative inline-flex items-center">
+    {/* Extended border lines */}
+    <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-16 h-px bg-white/30 -translate-x-20"></div>
+    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-16 h-px bg-white/30 translate-x-20"></div>
+    
+    {/* Main badge */}
+    <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/5 backdrop-blur-md border border-white/30">
+      <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+      <span className="text-sm text-white/90">Powered By Murf</span>
+    </div>
+  </div>
+</div>
 
         {/* Main Heading */}
         <div className="text-center mb-8">
-          <h1 className="text-6xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
+          <h1 className="text-9xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
             AI-Audio Made
           </h1>
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
@@ -80,66 +88,68 @@ const SnapCastLanding = ({ onNavigate }) => {
           <p className="text-gray-400">AI-driven voices designed for the next generation of creators.</p>
         </div>
 
-        {/* Get Started Button */}
+        {/* Get Started Button - Gray styling to match Figma */}
         <div className="mb-16">
-          <button 
-            className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full text-white font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+          <button
+            className="px-8 py-4 bg-gradient-to-r from-blue-300 to-purple-400 border border-white/20 rounded-full text-black font-semibold text-lg hover:from-blue-400 hover:to-purple-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             onClick={() => onNavigate('signup')}
           >
             Get Started
           </button>
         </div>
 
-        {/* Why Choose Us Section */}
-        <div className="w-full max-w-6xl">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-semibold text-white mb-2">Why Choose Us</h3>
-            <div className="w-24 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto"></div>
-          </div>
+        {/* Why Choose Us Section - Clean transparent container with connected border */}
+        <div className="w-full max-w-6xl relative">
+          {/* Container with transparent background and clean border */}
+          <div className="rounded-3xl border border-white/30 p-8 relative">
+            {/* "Why Choose Us" title positioned to connect with border */}
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
+              <div className="bg-gray-950/90 px-6 py-2 rounded-full border border-white/30">
+                <h3 className="text-2xl font-semibold text-white">Why Choose Us</h3>
+              </div>
+            </div>
+            
+            {/* Gradient line under title */}
+            <div className="flex justify-center mb-6 mt-8">
+              <div className="w-24 h-0.1 bg-gradient-to-r from-purple-500 to-blue-400"></div>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Feature Cards */}
-            {[
-              {
-                icon: "M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z",
-                gradient: "from-purple-500 to-pink-500",
-                title: "Instant Murf Voices",
-                description: "Turn your text into engaging short-form audio using realistic AI voices."
-              },
-              {
-                icon: "M13 10V3L4 14h7v7l9-11h-7z",
-                gradient: "from-blue-500 to-cyan-500",
-                title: "Remix In Seconds",
-                description: "Turn your text into engaging short-form audio using realistic AI voices."
-              },
-              {
-                icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
-                gradient: "from-green-500 to-emerald-500",
-                title: "Built For Virality",
-                description: "Turn your text into engaging short-form audio using realistic AI voices."
-              }
-            ].map((feature, index) => (
-              <section key={index} className="relative w-full h-[341px] bg-[#ffffff05] rounded-[31px] border border-solid border-[#9da3aed9] hover:bg-[#ffffff08] transition-all duration-300 group">
-                <div className="flex flex-col items-center justify-center h-full px-8">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300`}>
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={feature.icon} />
-                    </svg>
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {/* Feature Cards */}
+              {[
+                {
+                  icon: "M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z",
+                  gradient: "from-purple-500 to-pink-500",
+                  title: "Instant Murf Voices",
+                  description: "Turn your text into engaging short-form audio using realistic AI voices."
+                },
+                {
+                  icon: "M13 10V3L4 14h7v7l9-11h-7z",
+                  gradient: "from-blue-500 to-cyan-500",
+                  title: "Remix In Seconds",
+                  description: "Pick a new voice, change emotion, and publish remixes with one click."
+                },
+                {
+                  icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
+                  gradient: "from-green-500 to-emerald-500",
+                  title: "Built For Virality",
+                  description: "Scroll, like, and share VOICE in a feed designed for discovery."
+                }
+              ].map((feature, index) => (
+                <section key={index} className="relative w-full h-[250px] bg-[#ffffff05] rounded-[31px] border border-solid border-[#9da3aed9] hover:bg-[#ffffff08] transition-all duration-300 group">
+                  <div className="flex flex-col items-center justify-start h-full px-6 pt-10 ">
+                    
+                    <h2 className="text-5xl font-semibold text-gray-300 mb-6 text-center">{feature.title}</h2>
+                    <p className="font-normal text-[#fefefe] text-2xl text-center leading-[26px] max-w-[300px]">
+                      {feature.description}
+                    </p>
                   </div>
-                  <h4 className="text-xl font-semibold text-white mb-4 text-center">{feature.title}</h4>
-                  <p className="font-normal text-[#fefefe] text-lg text-center leading-[24px] max-w-[300px]">
-                    {feature.description}
-                  </p>
-                </div>
-              </section>
-            ))}
+                </section>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Background decorative elements */}
-      <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
     </div>
   );
 };
@@ -148,134 +158,66 @@ const SnapCastLanding = ({ onNavigate }) => {
 const CreatePage = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20"></div>
-      
-      {/* Audio waveform visualization on the left */}
-      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
-        <div className="flex items-end space-x-1 opacity-60">
-          {Array.from({length: 20}).map((_, i) => (
-            <div 
-              key={i}
-              className="w-1 bg-gradient-to-t from-purple-500 to-blue-400 animate-pulse"
-              style={{
-                height: `${Math.random() * 200 + 50}px`,
-                animationDelay: `${i * 0.1}s`,
-                animationDuration: `${1 + Math.random()}s`
-              }}
-            ></div>
-          ))}
-        </div>
-      </div>
-
-      {/* Glass Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50">
-        <div className="backdrop-blur-md bg-white/10 border-b border-white/20">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              {/* Navigation Links */}
-              <div className="flex items-center space-x-12">
-                <div 
-                  className="text-white font-semibold text-lg cursor-pointer"
-                  onClick={() => onNavigate && onNavigate('landing')}
-                >
-                  SnapCast
-                </div>
-                <div className="bg-white/20 text-white px-4 py-2 rounded-lg backdrop-blur-sm cursor-pointer">
-                  Creation
-                </div>
-                <div className="text-white/80 hover:text-white cursor-pointer transition-colors">Feed</div>
-              </div>
-              
-              {/* Hamburger Menu */}
-              <div className="flex flex-col space-y-1 cursor-pointer">
-                <div className="w-6 h-0.5 bg-white"></div>
-                <div className="w-6 h-0.5 bg-white"></div>
-                <div className="w-6 h-0.5 bg-white"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SharedBackground />
+      <SharedNavigation onNavigate={onNavigate} activePage="create" />
 
       {/* Main Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6 pt-20">
-        
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-10 pt-40">
+
         {/* VOICE AI Title */}
-        <div className="text-center mb-16">
-          <h1 className="text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-            VOICE AI
+        <div className="text-center mb-36">
+          <h1 className="text-8xl md:text-9xl font-bold mb-4 bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
+            EONA AI
           </h1>
         </div>
 
         {/* Two Cards Section */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl w-full">
-          
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl w-full relative z-10" style={{marginTop: '-210px'}}>
+
           {/* Generate Voice With Script Card */}
-          <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl border border-white/20 p-8 hover:bg-white/8 transition-all duration-300 group">
+          <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl border-2 border-blue-400 p-12 hover:bg-white/8 transition-all duration-300 group min-h-[400px]">
             <div className="flex flex-col items-center text-center h-full">
-              <h3 className="text-xl font-semibold text-white mb-6">
+              <h3 className="text-3xl font-light text-white mb-10 mt-6">
                 GENERATE VOICE WITH<br />YOUR SCRIPT
               </h3>
-              
+
               <div className="flex-1 mb-8">
-                <p className="text-gray-300 text-sm mb-4">
+                <p className="text-gray-300 text-lg mb-8">
                   Take Full Control Of Your Words.
                 </p>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-400 text-lg leading-relaxed mb-6 mt-14">
                   Upload Or Paste Your Own Script To Generate Exactly What You Want. Perfect If You Already Know What To Say.
                 </p>
               </div>
-              
-              <button onClick={() => onNavigate('compose')} className="w-full bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full border border-white/30 transition-all duration-300">
-                FROM SCRIPT
+
+              <button onClick={() => onNavigate('compose', true)} className="w-full-10 bg-gradient-to-r from-blue-200 to-purple-300 border border-white/20 rounded-full text-black font-semibold text-lg hover:bg-white/20 text-black px-6 py-3 rounded-full border border-white/30 transition-all duration-300 mt-8">
+                UPLOAD  SCRIPT
               </button>
             </div>
           </div>
 
           {/* Generate Voice Without Script Card */}
-          <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl border border-white/20 p-8 hover:bg-white/8 transition-all duration-300 group">
+          <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl border-2 border-blue-400 p-12 hover:bg-white/8 transition-all duration-300 group min-h-[400px]">
             <div className="flex flex-col items-center text-center h-full">
-              <h3 className="text-xl font-semibold text-white mb-6">
+              <h3 className="text-3xl font-light text-white mb-10 mt-6">
                 GENERATE VOICE WITH<br />WITHOUT SCRIPT
               </h3>
-              
+
               <div className="flex-1 mb-8">
-                <p className="text-gray-300 text-sm mb-4">
+                <p className="text-gray-300 text-lg mb-8">
                   No Script? No Problem.
                 </p>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-400 text-lg leading-relaxed mb-6 mt-14">
                   Let AI Craft A Natural, Engaging Script For You. Just Share Your Idea, And We'll Handle The Rest.
                 </p>
               </div>
-              
-              <button className="w-full bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full border border-white/30 transition-all duration-300">
+
+              <button onClick={() => onNavigate('compose', false)} className="w-full-10 bg-gradient-to-r from-blue-200 to-purple-300 border border-white/20 rounded-full text-black font-semibold text-lg hover:bg-white/20 text-black px-6 py-3 rounded-full border border-white/30 transition-all duration-300 mt-8">
                 WITHOUT SCRIPT
               </button>
             </div>
           </div>
 
-        </div>
-      </div>
-
-      {/* Background decorative elements */}
-      <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-      
-      {/* Audio waveform visualization on the right */}
-      <div className="absolute right-0 top-3/4 transform -translate-y-1/2">
-        <div className="flex items-end space-x-1 opacity-40">
-          {Array.from({length: 15}).map((_, i) => (
-            <div 
-              key={i}
-              className="w-1 bg-gradient-to-t from-blue-500 to-purple-400 animate-pulse"
-              style={{
-                height: `${Math.random() * 150 + 30}px`,
-                animationDelay: `${i * 0.12}s`,
-                animationDuration: `${1.2 + Math.random()}s`
-              }}
-            ></div>
-          ))}
         </div>
       </div>
     </div>
@@ -290,52 +232,50 @@ const SignUp = ({ onNavigate }) => {
   const [password, setPassword] = useState('');
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left Side - Voice Design */}
-      <div className="w-1/2 relative bg-gradient-radial from-gray-800 via-gray-900 to-black flex flex-col justify-center items-start pl-16">
-        {/* Voice Text */}
-        <div className="mb-8">
-          <h1 className="text-6xl font-bold text-white tracking-wider">VOICE</h1>
+    <div className="w-full h-screen flex bg-gray-100">
+      {/* Left Side - Dark with Radial Gradient */}
+      <div className="w-1/2 h-full bg-black flex items-center justify-center relative">
+        {/* Radial Gradient - Darker corners, lighter middle */}
+        <div className="absolute inset-0 bg-gradient-radial from-purple-800/40 via-pink-700/30 to-black"></div>
+        <div className="absolute inset-0 bg-radial-gradient" style={{
+          background: 'radial-gradient(ellipse at center, rgba(147, 51, 234, 0.3) 0%, rgba(219, 39, 119, 0.2) 30%, rgba(0, 0, 0, 0.9) 70%, rgba(0, 0, 0, 1) 100%)'
+        }}></div>
+        
+        {/* Voice Title - Moved above waveform */}
+        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+          <h1 className="text-white text-9xl mr-64 mt-16 mb-0  font-bold text-left drop-shadow-2xl">Voice</h1>
         </div>
         
-        {/* Waveform Animation */}
-        <div className="flex items-end space-x-2 mb-16">
-          {Array.from({length: 40}).map((_, i) => (
-            <div
-              key={i}
-              className="w-2 rounded-full animate-bounce"
-              style={{
-                height: `${Math.random() * 80 + 20}px`,
-                background: `linear-gradient(to top, 
-                  ${i % 4 === 0 ? '#ff6b9d' : 
-                    i % 4 === 1 ? '#a855f7' : 
-                    i % 4 === 2 ? '#3b82f6' : '#06b6d4'}, 
-                  ${i % 4 === 0 ? '#ff8fab' : 
-                    i % 4 === 1 ? '#c084fc' : 
-                    i % 4 === 2 ? '#60a5fa' : '#22d3ee'})`,
-                animationDelay: `${i * 0.05}s`,
-                animationDuration: `${0.5 + Math.random() * 0.5}s`
-              }}
-            />
-          ))}
+        {/* Waveform Animation - Centered */}
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <div className="flex items-end space-x-2">
+            <div className="w-4 h-32 bg-pink-400 rounded-t animate-bounce" style={{ animationDuration: '1s' }}></div>
+            <div className="w-4 h-48 bg-purple-400 rounded-t animate-bounce" style={{ animationDuration: '1.2s', animationDelay: '0.1s' }}></div>
+            <div className="w-5 h-64 bg-blue-400 rounded-t animate-bounce" style={{ animationDuration: '1.5s', animationDelay: '0.2s' }}></div>
+            <div className="w-6 h-72 bg-pink-300 rounded-t animate-bounce" style={{ animationDuration: '1.8s', animationDelay: '0.3s' }}></div>
+            <div className="w-5 h-56 bg-purple-300 rounded-t animate-bounce" style={{ animationDuration: '1.3s', animationDelay: '0.4s' }}></div>
+            <div className="w-4 h-40 bg-blue-300 rounded-t animate-bounce" style={{ animationDuration: '1.1s', animationDelay: '0.5s' }}></div>
+          </div>
         </div>
         
-        {/* Bottom Text */}
-        <div className="text-2xl font-bold text-white">
-          <span>JOIN THE NEXT WAVE OF </span>
-          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-            CREATORS
-          </span>
+        {/* Text Content - Bottom left */}
+        <div className="absolute left-28 bottom-32 z-10">
+          <div className="text-white text-6xl font-bold leading-tight">
+            <p>JOIN THE</p>
+            <p>NEXT</p>
+            <p>WAVE OF</p>
+            <p className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">CREATORS.</p>
+          </div>
         </div>
       </div>
 
       {/* Right Side - White Panel with Form */}
-      <div className="w-1/2 bg-white flex flex-col p-12">
+      <div className="w-3/4 bg-white flex flex-col p-12">
         {/* Header */}
-        <div className="flex justify-between items-center mb-12">
+        <div className="ml-28 mt-16 flex justify-between items-center mb-0">
           <h2 className="text-3xl font-light text-gray-800">CREATE ACCOUNT</h2>
-          <button 
-            className="text-gray-600 hover:text-gray-800 text-sm"
+          <button
+            className="mr-36 mt-20 absolute top-8 right-8 text-gray-600 hover:text-gray-800 text-xl"
             onClick={() => onNavigate('landing')}
           >
             Back
@@ -343,7 +283,7 @@ const SignUp = ({ onNavigate }) => {
         </div>
 
         {/* Form */}
-        <div className="space-y-6 flex-1">
+        <div className="ml-28 mr-28 mt-16 space-y-6 flex-1">
           {/* First Name and Second Name Row */}
           <div className="grid grid-cols-2 gap-4">
             <div className="relative">
@@ -401,14 +341,14 @@ const SignUp = ({ onNavigate }) => {
           </div>
 
           {/* Create Account Button */}
-          <button className="w-full h-16 bg-gray-800 text-white rounded-full text-lg font-light hover:bg-gray-900 transition-colors">
+          <button className= "w-full h-[80px] bg-[#414143] rounded-[40px] border border-solid border-black text-white font-light text-2xl hover:bg-gray-700 transition-colors duration-200">
             Create Account
           </button>
 
           {/* Already have account */}
           <div className="text-center">
-            <span className="text-gray-600">Already have an Account? </span>
-            <a href="#" className="text-gray-800 underline">Sign in</a>
+            <span className="text-gray-600 font-light text-lg">Already have an Account? </span>
+            <a href="#" className="text-[#414143] hover:underline text-lg">Sign in</a>
           </div>
 
           {/* OR Divider */}
@@ -432,26 +372,33 @@ const SignUp = ({ onNavigate }) => {
     </div>
   );
 };
+
 // Compose page from script
-const ComposePage = ({ onNavigate }) => (
-  <div className="min-h-screen bg-black text-white p-8">
-    <button
-      onClick={() => onNavigate('create')}
-      className="mb-6 px-4 py-2 rounded-full border border-white/30"
-    >
-      ← Back
-    </button>
-    <h1 className="text-5xl font-light tracking-widest mb-8"></h1>
-    {/* Paste your real compose UI here */}
-  </div>
-);
+const ComposePage = ({ onNavigate, script_flag }) => {
+  return (
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <SharedBackground />
+      <SharedNavigation onNavigate={onNavigate} activePage="create" />
+      
+      <div className="relative z-20 pt-28 px-6">
+        {script_flag ? <Composefromscript onNavigate={onNavigate} />
+          :
+          <ComposeWithoutScriptPage onNavigate={onNavigate} />}
+      </div>
+    </div>
+  );
+};
 
 // Complete App Component with Navigation
 function App() {
   const [currentPage, setCurrentPage] = useState('landing');
-
-  const handleNavigation = (page) => {
+  const [flag, setflag] = useState(false);
+  
+  const handleNavigation = (page, flag) => {
     setCurrentPage(page);
+    if (flag !== undefined) {
+      setflag(flag);
+    }
   };
 
   if (currentPage === 'landing') {
@@ -460,10 +407,10 @@ function App() {
     return <CreatePage onNavigate={handleNavigation} />;
   } else if (currentPage === 'signup') {
     return <SignUp onNavigate={handleNavigation} />;
+  } else if (currentPage === 'compose') {
+    return <ComposePage script_flag={flag} onNavigate={handleNavigation} />;
   }
-    else if (currentPage === 'compose') {
-    return <ComposePage onNavigate={handleNavigation} />;
-    } 
+  
   return null;
 }
 
